@@ -24,13 +24,6 @@ ActiveRecord::Schema.define(version: 2019_05_06_043404) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
-  create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "prefecture_id"
-    t.string "city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -91,6 +84,16 @@ ActiveRecord::Schema.define(version: 2019_05_06_043404) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "introduction"
+    t.string "image"
+    t.string "nickname", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -120,4 +123,5 @@ ActiveRecord::Schema.define(version: 2019_05_06_043404) do
   add_foreign_key "deliveries", "items"
   add_foreign_key "images", "items"
   add_foreign_key "items", "users"
+  add_foreign_key "profiles", "users"
 end

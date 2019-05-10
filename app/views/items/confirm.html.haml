@@ -1,7 +1,7 @@
 .single-container
   %header.single-header
     %h1
-      = link_to('https://www.mercari.com/jp/') do
+      = link_to root_path do
         = image_tag 'mercari_logo_color.svg', alt: 'mercari', height: '49px', width: '185px'
   %main.single-main
     %section.buy-item-container
@@ -27,7 +27,10 @@
                 .buy-price
                   %span{data: {buy: {pay: "#{@item.price}"}}}
                     = "¥#{@item.price}"
-              = f.submit "購入する", {class: "btn-box__default  btn--purchase btn-box--red"}
+              = form_with url: purchase_item_path do
+                :plain
+                  <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_5c749df69c612790371ab4d1"></script>
+              -# = f.submit "購入する", {class: "btn-box__default  btn--purchase btn-box--red"}
               .modal-overlay
               .modal-screen
                 %p 購入が完了しました。

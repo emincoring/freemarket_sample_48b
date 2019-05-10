@@ -76,7 +76,7 @@ class ItemsController < ApplicationController
 
   def purchase
     Payjp::Charge.create(
-      amount: @item.price,
+      amount: @item.price, #決済する値段
       customer: @card.customer_id,
       currency: 'jpy'
     )
